@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infographic: ภาพรวมโครงการกลุ่มสีแดง (ธีมสีแดง)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+    <!--
+    Narrative & Structure Plan (Red Theme):
+    1. Header: Main title of the infographic.
+    2. Overall Summary: A section with key metrics (total projects) and a donut chart visualizing the overall status distribution (Delayed vs. Canceled).
+    3. Project Details Grid: A responsive grid layout displaying each of the 6 projects in individual "Material Design" cards.
+    4. Card Content: Each card will contain the project title, a clear status badge with an icon, the reason for the status, and the proposed actions. For project 6, a progress bar will be included.
+    5. Color Palette: "Professional Reds" - Main: #7F1D1D, Accent: #B91C1C, Progress: #DC2626. Status colors remain distinct: Yellow/Orange for Delayed (#EE9B00), Red for Canceled (#AE2012).
+    6. Typography: 'Sarabun' for Thai language readability.
+
+    Visualization Selection:
+    - Retained Donut Chart and Progress Bar for data representation clarity. No changes to visualization types were needed.
+    -->
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #F8FAFC; 
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        .card-gradient {
+            background-image: linear-gradient(to top right, #FFFFFF, #F1F5F9);
+        }
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        .status-delayed {
+            background-color: #FFFBEB; 
+            color: #B45309; 
+            border: 1px solid #FBBF24;
+        }
+        .status-canceled {
+            background-color: #FEF2F2;
+            color: #B91C1C;
+            border: 1px solid #FCA5A5;
+        }
+        .progress-bar-bg {
+            background-color: #E5E7EB;
+            border-radius: 9999px;
+            overflow: hidden;
+            height: 1rem;
+        }
+        .progress-bar-fill {
+            background-color: #DC2626; /* Changed to red */
+            height: 100%;
+            border-radius: 9999px;
+            transition: width 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-10">
+            <h1 class="text-4xl md:text-5xl font-bold text-red-900">ภาพรวมโครงการกลุ่มสีแดง</h1>
+            <p class="text-lg text-slate-600 mt-2">สรุปความคืบหน้า ปัญหา และข้อเสนอแนะ ณ ไตรมาสปัจจุบัน</p>
+        </header>
+
+        <section class="bg-white rounded-2xl shadow-lg p-6 md:p-8 mb-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="text-center md:text-left">
+                    <h2 class="text-2xl font-bold text-red-800 mb-4">สรุปภาพรวม</h2>
+                    <div class="flex justify-center md:justify-start space-x-8">
+                        <div class="text-center">
+                            <p class="text-5xl font-bold text-red-900">6</p>
+                            <p class="text-slate-500">โครงการทั้งหมด</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-5xl font-bold text-[#EE9B00]">5</p>
+                            <p class="text-slate-500">ล่าช้ากว่าแผน</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-5xl font-bold text-[#AE2012]">1</p>
+                            <p class="text-slate-500">ยกเลิก</p>
+                        </div>
+                    </div>
+                     <p class="mt-6 text-slate-600">จากข้อมูลทั้งหมด พบว่าโครงการส่วนใหญ่กำลังประสบปัญหาความล่าช้าซึ่งต้องการการติดตามและแก้ไขอย่างเร่งด่วน ในขณะที่มี 1 โครงการที่ถูกยกเลิกไป</p>
+                </div>
+                <div>
+                    <div class="chart-container">
+                        <canvas id="statusChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <main class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+            
+            <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col card-gradient transition-transform transform hover:scale-105 hover:shadow-2xl">
+                <h3 class="text-xl font-bold text-red-800 mb-3">จุดตรวจความปลอดภัยรถโดยสารสาธารณะขอนแก่น</h3>
+                <div class="mb-4">
+                    <span class="status-badge status-canceled">
+                        <span class="mr-2">❌</span>ยกเลิก
+                    </span>
+                </div>
+                <div class="text-sm space-y-3 flex-grow">
+                    <p><strong class="text-slate-700">สาเหตุ:</strong> คาดว่าจะไม่สามารถผูกพันสัญญาได้ทันภายในปีงบประมาณ 2568</p>
+                    <div>
+                        <strong class="text-slate-700">ข้อเสนอ:</strong>
+                        <ul class="list-disc list-inside text-slate-600 mt-1 pl-2">
+                            <li>สนภ. ทบทวนรายละเอียดโครงการ</li>
+                            <li>จัดทำแผนและกรอบเวลาที่รัดกุมและเป็นจริงได้มากขึ้นสำหรับเสนอของบประมาณครั้งถัดไป</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col card-gradient transition-transform transform hover:scale-105 hover:shadow-2xl">
+                <h3 class="text-xl font-bold text-red-800 mb-3">ศึกษาพัฒนาการเผชิญเหตุฉุกเฉินฯ รถโดยสาร</h3>
+                <div class="mb-4">
+                    <span class="status-badge status-delayed">
+                        <span class="mr-2">⚠️</span>ล่าช้ากว่าแผน
+                    </span>
+                </div>
+                <div class="text-sm space-y-3 flex-grow">
+                    <p><strong class="text-slate-700">สาเหตุ:</strong> การเสนอของบประมาณต้องแก้ไขถึง 3 ครั้ง (ปัจจุบันผ่านความเห็นชอบแล้ว)</p>
+                    <div>
+                        <strong class="text-slate-700">ข้อเสนอ:</strong>
+                        <ul class="list-disc list-inside text-slate-600 mt-1 pl-2">
+                            <li>สนภ. เตรียมข้อมูลให้พร้อมสำหรับชี้แจงคณะอนุกรรมการฯ เพื่อให้เกิดการอนุมัติโดยเร็ว</li>
+                            <li>เร่งเริ่มกระบวนการจัดจ้างต่อไป</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col card-gradient transition-transform transform hover:scale-105 hover:shadow-2xl">
+                <h3 class="text-xl font-bold text-red-800 mb-3">พัฒนาระบบออกใบอนุญาตขับรถ (ดิจิทัล)</h3>
+                <div class="mb-4">
+                    <span class="status-badge status-delayed">
+                        <span class="mr-2">⚠️</span>ล่าช้ากว่าแผน
+                    </span>
+                </div>
+                <div class="text-sm space-y-3 flex-grow">
+                    <p><strong class="text-slate-700">สาเหตุ:</strong> การจัดซื้อจัดจ้างรอบแรกมีผู้ผ่านเกณฑ์รายเดียวจึงต้องยกเลิกและประกวดราคาใหม่ เสี่ยงงบถูกพับ</p>
+                    <div>
+                        <strong class="text-slate-700">ข้อเสนอ:</strong>
+                        <ul class="list-disc list-inside text-slate-600 mt-1 pl-2">
+                            <li>ศทส. เร่งรัดกระบวนการประกวดราคาและบริหารจัดการให้รวดเร็วที่สุด</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col card-gradient transition-transform transform hover:scale-105 hover:shadow-2xl">
+                <h3 class="text-xl font-bold text-red-800 mb-3">พัฒนาระบบบริการทะเบียนรถ (ดิจิทัล)</h3>
+                <div class="mb-4">
+                    <span class="status-badge status-delayed">
+                        <span class="mr-2">⚠️</span>ล่าช้ากว่าแผน
+                    </span>
+                </div>
+                <div class="text-sm space-y-3 flex-grow">
+                    <p><strong class="text-slate-700">สาเหตุ:</strong> ต้องแก้ไข TOR ตามข้อกำหนดใหม่ของกรมบัญชีกลาง (เม.ย. 68)</p>
+                    <div>
+                        <strong class="text-slate-700">ข้อเสนอ:</strong>
+                        <ul class="list-disc list-inside text-slate-600 mt-1 pl-2">
+                            <li>ศทส. เร่งรัดการปรับปรุงและอนุมัติ TOR ที่แก้ไขใหม่โดยเร็วที่สุด</li>
+                            <li>เพื่อให้ประกาศจัดซื้อจัดจ้างได้เร็วขึ้น</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col card-gradient transition-transform transform hover:scale-105 hover:shadow-2xl">
+                <h3 class="text-xl font-bold text-red-800 mb-3">ขนส่งสาธารณะจังหวัดนำร่อง (อุดรธานี)</h3>
+                <div class="mb-4">
+                    <span class="status-badge status-delayed">
+                        <span class="mr-2">⚠️</span>ล่าช้ากว่าแผน
+                    </span>
+                </div>
+                <div class="text-sm space-y-3 flex-grow">
+                    <p><strong class="text-slate-700">สาเหตุ:</strong> การหาผู้ประกอบการล้มเหลว 2 ครั้งซ้อน สะท้อนปัญหาเชิงโครงสร้าง</p>
+                    <div>
+                        <strong class="text-slate-700">ข้อเสนอ:</strong>
+                        <ul class="list-disc list-inside text-slate-600 mt-1 pl-2">
+                            <li>สนส. และ สขจ. อุดรธานี ทบทวนความเป็นไปได้ของโครงการ</li>
+                            <li>จัดเวทีรับฟังความเห็นผู้ประกอบการเพื่อออกแบบเงื่อนไขที่จูงใจ</li>
+                            <li>แสวงหาความร่วมมือกับท้องถิ่น</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col card-gradient transition-transform transform hover:scale-105 hover:shadow-2xl">
+                <h3 class="text-xl font-bold text-red-800 mb-3">ศูนย์ขนส่งสินค้าเชียงของ (เชียงราย)</h3>
+                <div class="mb-4">
+                    <span class="status-badge status-delayed">
+                        <span class="mr-2">⚠️</span>ล่าช้ากว่าแผน
+                    </span>
+                </div>
+                <div class="text-sm space-y-3 flex-grow">
+                    <div>
+                        <strong class="text-slate-700">ความคืบหน้าการก่อสร้าง:</strong>
+                        <div class="flex items-center mt-1">
+                            <div class="progress-bar-bg w-full">
+                                <div class="progress-bar-fill" style="width: 37.731%;"></div>
+                            </div>
+                            <span class="ml-3 font-semibold text-red-600">37.7%</span>
+                        </div>
+                    </div>
+                    <p><strong class="text-slate-700">สาเหตุ:</strong> อยู่ระหว่างทบทวนผลการศึกษา PPP ใหม่ทั้งหมด ซึ่งเป็นความเสี่ยงสูง</p>
+                    <div>
+                        <strong class="text-slate-700">ข้อเสนอ:</strong>
+                        <ul class="list-disc list-inside text-slate-600 mt-1 pl-2">
+                            <li>สนค. ประเมินแผนและเร่งรัดการก่อสร้างร่วมกับผู้รับเหมา</li>
+                            <li>ทบทวนผลศึกษา PPP ให้ได้ข้อสรุปที่ชัดเจนโดยเร็ว</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        // Chart.js script remains unchanged as the status colors are still relevant.
+        const ctx = document.getElementById('statusChart').getContext('2d');
+        const statusChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['ล่าช้ากว่าแผน', 'ยกเลิก'],
+                datasets: [{
+                    label: 'สถานะโครงการ',
+                    data: [5, 1],
+                    backgroundColor: [
+                        '#EE9B00', 
+                        '#AE2012' 
+                    ],
+                    borderColor: [
+                        '#FFFFFF',
+                        '#FFFFFF'
+                    ],
+                    borderWidth: 4,
+                    hoverOffset: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '70%',
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            font: {
+                                family: 'Sarabun',
+                                size: 14,
+                                weight: '600'
+                            },
+                            color: '#475569',
+                            padding: 20
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                if (Array.isArray(label)) {
+                                  return label.join(' ');
+                                } else {
+                                  return label;
+                                }
+                            }
+                        },
+                        titleFont: {
+                            family: 'Sarabun',
+                            weight: 'bold'
+                        },
+                        bodyFont: {
+                            family: 'Sarabun'
+                        },
+                        padding: 10,
+                        boxPadding: 4,
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
