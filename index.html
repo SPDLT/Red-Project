@@ -3,12 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infographic: ภาพรวมโครงการกลุ่มสีแดง (พร้อม Gemini AI)</title>
+    <title>Infographic: ภาพรวมโครงการกลุ่มสีแดง (ธีมสีแดง)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+    <!--
+    Narrative & Structure Plan (Red Theme):
+    1. Header: Main title of the infographic.
+    2. Overall Summary: A section with key metrics (total projects) and a donut chart visualizing the overall status distribution (Delayed vs. Canceled).
+    3. Project Details Grid: A responsive grid layout displaying each of the 6 projects in individual "Material Design" cards.
+    4. Card Content: Each card will contain the project title, a clear status badge with an icon, the reason for the status, and the proposed actions. For project 6, a progress bar will be included.
+    5. Color Palette: "Professional Reds" - Main: #7F1D1D, Accent: #B91C1C, Progress: #DC2626. Status colors remain distinct: Yellow/Orange for Delayed (#EE9B00), Red for Canceled (#AE2012).
+    6. Typography: 'Sarabun' for Thai language readability.
+
+    Visualization Selection:
+    - Retained Donut Chart and Progress Bar for data representation clarity. No changes to visualization types were needed.
+    -->
     <style>
         body {
             font-family: 'Sarabun', sans-serif;
@@ -51,45 +63,10 @@
             height: 1rem;
         }
         .progress-bar-fill {
-            background-color: #DC2626; /* Red Theme */
+            background-color: #DC2626; /* Changed to red */
             height: 100%;
             border-radius: 9999px;
             transition: width 0.5s ease-in-out;
-        }
-        /* Gemini AI Feature Styles */
-        .gemini-button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            padding: 8px 16px;
-            border-radius: 8px;
-            background-color: #7F1D1D; /* Dark Red */
-            color: white;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s, opacity 0.3s;
-        }
-        .gemini-button:hover {
-            background-color: #B91C1C; /* Brighter Red */
-        }
-        .gemini-button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-        .loader {
-            border: 4px solid #f3f3f3; /* Light grey */
-            border-top: 4px solid #DC2626; /* Red */
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            animation: spin 1s linear infinite;
-            margin: 10px auto;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
@@ -99,7 +76,7 @@
 
         <header class="text-center mb-10">
             <h1 class="text-4xl md:text-5xl font-bold text-red-900">ภาพรวมโครงการกลุ่มสีแดง</h1>
-            <p class="text-lg text-slate-600 mt-2">สรุปความคืบหน้า ปัญหา และข้อเสนอแนะ ณ ไตรมาสปัจจุบัน (ขับเคลื่อนด้วย Gemini AI)</p>
+            <p class="text-lg text-slate-600 mt-2">สรุปความคืบหน้า ปัญหา และข้อเสนอแนะ ณ ไตรมาสปัจจุบัน</p>
         </header>
 
         <section class="bg-white rounded-2xl shadow-lg p-6 md:p-8 mb-12">
@@ -132,8 +109,7 @@
 
         <main class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
             
-            <!-- Project 1: Canceled (No AI button) -->
-            <div id="project-1" class="bg-white rounded-2xl shadow-lg p-6 flex flex-col card-gradient transition-transform transform hover:scale-105 hover:shadow-2xl">
+            <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col card-gradient transition-transform transform hover:scale-105 hover:shadow-2xl">
                 <h3 class="text-xl font-bold text-red-800 mb-3">จุดตรวจความปลอดภัยรถโดยสารสาธารณะขอนแก่น</h3>
                 <div class="mb-4">
                     <span class="status-badge status-canceled">
@@ -152,11 +128,12 @@
                 </div>
             </div>
 
-            <!-- Project 2: Delayed (With AI button) -->
-            <div id="project-2" class="bg-white rounded-2xl shadow-lg p-6 flex flex-col card-gradient transition-transform transform hover:scale-105 hover:shadow-2xl">
+            <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col card-gradient transition-transform transform hover:scale-105 hover:shadow-2xl">
                 <h3 class="text-xl font-bold text-red-800 mb-3">ศึกษาพัฒนาการเผชิญเหตุฉุกเฉินฯ รถโดยสาร</h3>
                 <div class="mb-4">
-                    <span class="status-badge status-delayed"><span class="mr-2">⚠️</span>ล่าช้ากว่าแผน</span>
+                    <span class="status-badge status-delayed">
+                        <span class="mr-2">⚠️</span>ล่าช้ากว่าแผน
+                    </span>
                 </div>
                 <div class="text-sm space-y-3 flex-grow">
                     <p><strong class="text-slate-700">สาเหตุ:</strong> การเสนอของบประมาณต้องแก้ไขถึง 3 ครั้ง (ปัจจุบันผ่านความเห็นชอบแล้ว)</p>
@@ -168,17 +145,14 @@
                         </ul>
                     </div>
                 </div>
-                <div class="mt-4 pt-4 border-t border-slate-200">
-                    <button onclick="generateActionPlan('project-2')" class="gemini-button">✨ สร้างแผนปฏิบัติการ</button>
-                    <div id="gemini-output-2" class="mt-4 text-sm text-slate-700"></div>
-                </div>
             </div>
 
-            <!-- Project 3: Delayed (With AI button) -->
-            <div id="project-3" class="bg-white rounded-2xl shadow-lg p-6 flex flex-col card-gradient transition-transform transform hover:scale-105 hover:shadow-2xl">
+            <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col card-gradient transition-transform transform hover:scale-105 hover:shadow-2xl">
                 <h3 class="text-xl font-bold text-red-800 mb-3">พัฒนาระบบออกใบอนุญาตขับรถ (ดิจิทัล)</h3>
                 <div class="mb-4">
-                    <span class="status-badge status-delayed"><span class="mr-2">⚠️</span>ล่าช้ากว่าแผน</span>
+                    <span class="status-badge status-delayed">
+                        <span class="mr-2">⚠️</span>ล่าช้ากว่าแผน
+                    </span>
                 </div>
                 <div class="text-sm space-y-3 flex-grow">
                     <p><strong class="text-slate-700">สาเหตุ:</strong> การจัดซื้อจัดจ้างรอบแรกมีผู้ผ่านเกณฑ์รายเดียวจึงต้องยกเลิกและประกวดราคาใหม่ เสี่ยงงบถูกพับ</p>
@@ -189,17 +163,14 @@
                         </ul>
                     </div>
                 </div>
-                <div class="mt-4 pt-4 border-t border-slate-200">
-                    <button onclick="generateActionPlan('project-3')" class="gemini-button">✨ สร้างแผนปฏิบัติการ</button>
-                    <div id="gemini-output-3" class="mt-4 text-sm text-slate-700"></div>
-                </div>
             </div>
 
-            <!-- Project 4: Delayed (With AI button) -->
-            <div id="project-4" class="bg-white rounded-2xl shadow-lg p-6 flex flex-col card-gradient transition-transform transform hover:scale-105 hover:shadow-2xl">
+            <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col card-gradient transition-transform transform hover:scale-105 hover:shadow-2xl">
                 <h3 class="text-xl font-bold text-red-800 mb-3">พัฒนาระบบบริการทะเบียนรถ (ดิจิทัล)</h3>
                 <div class="mb-4">
-                    <span class="status-badge status-delayed"><span class="mr-2">⚠️</span>ล่าช้ากว่าแผน</span>
+                    <span class="status-badge status-delayed">
+                        <span class="mr-2">⚠️</span>ล่าช้ากว่าแผน
+                    </span>
                 </div>
                 <div class="text-sm space-y-3 flex-grow">
                     <p><strong class="text-slate-700">สาเหตุ:</strong> ต้องแก้ไข TOR ตามข้อกำหนดใหม่ของกรมบัญชีกลาง (เม.ย. 68)</p>
@@ -211,17 +182,14 @@
                         </ul>
                     </div>
                 </div>
-                 <div class="mt-4 pt-4 border-t border-slate-200">
-                    <button onclick="generateActionPlan('project-4')" class="gemini-button">✨ สร้างแผนปฏิบัติการ</button>
-                    <div id="gemini-output-4" class="mt-4 text-sm text-slate-700"></div>
-                </div>
             </div>
 
-            <!-- Project 5: Delayed (With AI button) -->
-            <div id="project-5" class="bg-white rounded-2xl shadow-lg p-6 flex flex-col card-gradient transition-transform transform hover:scale-105 hover:shadow-2xl">
+            <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col card-gradient transition-transform transform hover:scale-105 hover:shadow-2xl">
                 <h3 class="text-xl font-bold text-red-800 mb-3">ขนส่งสาธารณะจังหวัดนำร่อง (อุดรธานี)</h3>
                 <div class="mb-4">
-                    <span class="status-badge status-delayed"><span class="mr-2">⚠️</span>ล่าช้ากว่าแผน</span>
+                    <span class="status-badge status-delayed">
+                        <span class="mr-2">⚠️</span>ล่าช้ากว่าแผน
+                    </span>
                 </div>
                 <div class="text-sm space-y-3 flex-grow">
                     <p><strong class="text-slate-700">สาเหตุ:</strong> การหาผู้ประกอบการล้มเหลว 2 ครั้งซ้อน สะท้อนปัญหาเชิงโครงสร้าง</p>
@@ -234,17 +202,14 @@
                         </ul>
                     </div>
                 </div>
-                 <div class="mt-4 pt-4 border-t border-slate-200">
-                    <button onclick="generateActionPlan('project-5')" class="gemini-button">✨ สร้างแผนปฏิบัติการ</button>
-                    <div id="gemini-output-5" class="mt-4 text-sm text-slate-700"></div>
-                </div>
             </div>
 
-            <!-- Project 6: Delayed (With AI button) -->
-            <div id="project-6" class="bg-white rounded-2xl shadow-lg p-6 flex flex-col card-gradient transition-transform transform hover:scale-105 hover:shadow-2xl">
+            <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col card-gradient transition-transform transform hover:scale-105 hover:shadow-2xl">
                 <h3 class="text-xl font-bold text-red-800 mb-3">ศูนย์ขนส่งสินค้าเชียงของ (เชียงราย)</h3>
                 <div class="mb-4">
-                    <span class="status-badge status-delayed"><span class="mr-2">⚠️</span>ล่าช้ากว่าแผน</span>
+                    <span class="status-badge status-delayed">
+                        <span class="mr-2">⚠️</span>ล่าช้ากว่าแผน
+                    </span>
                 </div>
                 <div class="text-sm space-y-3 flex-grow">
                     <div>
@@ -265,17 +230,13 @@
                         </ul>
                     </div>
                 </div>
-                <div class="mt-4 pt-4 border-t border-slate-200">
-                    <button onclick="generateActionPlan('project-6')" class="gemini-button">✨ สร้างแผนปฏิบัติการ</button>
-                    <div id="gemini-output-6" class="mt-4 text-sm text-slate-700"></div>
-                </div>
             </div>
 
         </main>
     </div>
 
     <script>
-        // Chart.js script remains unchanged
+        // Chart.js script remains unchanged as the status colors are still relevant.
         const ctx = document.getElementById('statusChart').getContext('2d');
         const statusChart = new Chart(ctx, {
             type: 'doughnut',
@@ -284,8 +245,14 @@
                 datasets: [{
                     label: 'สถานะโครงการ',
                     data: [5, 1],
-                    backgroundColor: ['#EE9B00', '#AE2012'],
-                    borderColor: ['#FFFFFF', '#FFFFFF'],
+                    backgroundColor: [
+                        '#EE9B00', 
+                        '#AE2012' 
+                    ],
+                    borderColor: [
+                        '#FFFFFF',
+                        '#FFFFFF'
+                    ],
                     borderWidth: 4,
                     hoverOffset: 8
                 }]
@@ -295,95 +262,43 @@
                 maintainAspectRatio: false,
                 cutout: '70%',
                 plugins: {
-                    legend: { position: 'bottom', labels: { font: { family: 'Sarabun', size: 14, weight: '600' }, color: '#475569', padding: 20 }},
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            font: {
+                                family: 'Sarabun',
+                                size: 14,
+                                weight: '600'
+                            },
+                            color: '#475569',
+                            padding: 20
+                        }
+                    },
                     tooltip: {
-                        titleFont: { family: 'Sarabun', weight: 'bold' },
-                        bodyFont: { family: 'Sarabun' },
-                        padding: 10, boxPadding: 4,
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                if (Array.isArray(label)) {
+                                  return label.join(' ');
+                                } else {
+                                  return label;
+                                }
+                            }
+                        },
+                        titleFont: {
+                            family: 'Sarabun',
+                            weight: 'bold'
+                        },
+                        bodyFont: {
+                            family: 'Sarabun'
+                        },
+                        padding: 10,
+                        boxPadding: 4,
                     }
                 }
             }
         });
-
-        /**
-         * Generates an action plan for a project using the Gemini API.
-         * @param {string} projectId The ID of the project card element.
-         */
-        async function generateActionPlan(projectId) {
-            const projectCard = document.getElementById(projectId);
-            const outputDiv = projectCard.querySelector(`[id^="gemini-output-"]`);
-            const button = projectCard.querySelector('button');
-
-            // Show loading state and disable the button
-            outputDiv.innerHTML = '<div class="loader"></div><p class="text-center text-slate-500">กำลังสร้างแผน...กรุณารอสักครู่</p>';
-            button.disabled = true;
-            
-            // Extract project data from the card to build the prompt
-            const title = projectCard.querySelector('h3').innerText;
-            const reason = projectCard.querySelector('p > strong').nextSibling.textContent.trim();
-            const proposalsList = projectCard.querySelectorAll('ul li');
-            let proposals = Array.from(proposalsList).map(li => `- ${li.innerText}`).join('\n');
-
-            const prompt = `ในฐานะผู้เชี่ยวชาญด้านการบริหารโครงการ โปรดวิเคราะห์ข้อมูลโครงการต่อไปนี้และสร้างแผนปฏิบัติการ (Action Plan) ที่ละเอียดและนำไปปฏิบัติได้จริงเพื่อแก้ไขสถานการณ์
-    
-ข้อมูลโครงการ:
-- ชื่อโครงการ: ${title}
-- สถานะ: ล่าช้ากว่าแผน
-- สาเหตุของปัญหา: ${reason}
-- ข้อเสนอเบื้องต้น:
-${proposals}
-
-คำแนะนำสำหรับแผนปฏิบัติการ:
-1.  ระบุขั้นตอนที่ชัดเจนและเป็นรูปธรรม
-2.  เสนอผู้รับผิดชอบที่น่าจะเป็นไปได้ (โดยใช้ชื่อย่อหน่วยงานที่ให้มา)
-3.  หากเป็นไปได้ ให้ประมาณกรอบเวลาสำหรับแต่ละขั้นตอน
-4.  จัดลำดับความสำคัญของแต่ละขั้นตอน
-5.  ระบุความเสี่ยงที่อาจเกิดขึ้นเพิ่มเติม พร้อมแนวทางป้องกัน
-
-กรุณาจัดรูปแบบคำตอบเป็น HTML ที่มีโครงสร้างเป็นระเบียบ โดยใช้ <ul> และ <li> สำหรับรายการต่างๆ และใช้ <strong> เพื่อเน้นหัวข้อสำคัญ`;
-
-            try {
-                let chatHistory = [];
-                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
-                const payload = { contents: chatHistory };
-                const apiKey = ""; // API key is handled by the environment, leave it blank.
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                if (!response.ok) {
-                    throw new Error(`API Error: ${response.statusText} (${response.status})`);
-                }
-
-                const result = await response.json();
-                
-                let generatedText = "ขออภัย ไม่สามารถสร้างแผนได้ในขณะนี้";
-                if (result.candidates && result.candidates.length > 0 &&
-                    result.candidates[0].content && result.candidates[0].content.parts &&
-                    result.candidates[0].content.parts.length > 0) {
-                    generatedText = result.candidates[0].content.parts[0].text;
-                } else if (result.promptFeedback && result.promptFeedback.blockReason) {
-                    generatedText = `<p class="text-red-600"><strong>AI ไม่สามารถประมวลผลได้:</strong> ${result.promptFeedback.blockReason}</p><p class="text-sm text-slate-500 mt-2">อาจเกิดจากนโยบายความปลอดภัย โปรดลองปรับแก้ข้อมูลและลองใหม่อีกครั้ง</p>`;
-                } else {
-                     console.error("Unexpected API response structure:", result);
-                }
-                
-                // Display the generated response
-                outputDiv.innerHTML = generatedText.replace(/`/g, ''); // Basic sanitization
-                outputDiv.classList.add('p-4', 'bg-slate-100', 'rounded-lg', 'border', 'border-slate-200');
-
-            } catch (error) {
-                console.error('Error calling Gemini API:', error);
-                outputDiv.innerHTML = `<p class="text-red-600 font-semibold">เกิดข้อผิดพลาดในการเชื่อมต่อกับ AI</p><p class="text-sm text-slate-600">${error.message}</p>`;
-            } finally {
-                // Re-enable the button
-                button.disabled = false;
-            }
-        }
     </script>
 </body>
 </html>
